@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/github.io/devkart/static/css/main.3684c921.css",
+    "main.js": "/github.io/devkart/static/js/main.cafa2f40.js",
+    "static/media/Cart.png": "/github.io/devkart/static/media/Cart.1e7d02f3a6a12bac2eed.png",
+    "index.html": "/github.io/devkart/index.html",
+    "main.3684c921.css.map": "/github.io/devkart/static/css/main.3684c921.css.map",
+    "main.cafa2f40.js.map": "/github.io/devkart/static/js/main.cafa2f40.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3684c921.css",
+    "static/js/main.cafa2f40.js"
+  ]
+}
