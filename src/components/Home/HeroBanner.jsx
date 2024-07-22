@@ -1,7 +1,9 @@
 import React from "react";
 import Cart from "../../assets/Cart.png";
+import { useNavigate } from "react-router";
 
 const HeroBanner = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-primary-500 w-full flex flex-col md:flex-row items-center relative">
       <div className="w-full md:w-2/4 p-8 md:p-16 lg:p-36">
@@ -11,7 +13,12 @@ const HeroBanner = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-        <button className="bg-yellow-300 text-lg md:text-xl py-2 px-6 rounded-lg hover:bg-red-500 transition duration-300">
+        <button
+          onClick={() => {
+            navigate("/products");
+          }}
+          className="bg-yellow-300 text-lg md:text-xl py-2 px-6 rounded-lg hover:bg-red-500 transition duration-300"
+        >
           Shop Now
         </button>
       </div>

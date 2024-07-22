@@ -1,21 +1,29 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import {
   CodeBracketIcon,
   Bars3Icon,
   XMarkIcon,
   ShoppingCartIcon,
+  FunnelIcon,
 } from "@heroicons/react/24/outline";
+import { CartState } from "../../context/context";
+import Filters from "../Products/Filters";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [filterMenu, setFilterMenu] = useState(false);
+
+  const {
+    state: { cart },
+  } = CartState();
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleContactClick = (e) => {
     e.preventDefault();
+    setToggleMenu(false);
     if (location.pathname === "/") {
       // If we're already on the home page, just scroll to the section
       const contactSection = document.getElementById("contact-us");
@@ -29,8 +37,8 @@ const Navbar = () => {
   };
   return (
     <nav className="bg-gray-200 top-0 sticky z-10">
-      <div className=" mx-auto">
-        <div className="flex mx-auto justify-between w-5/6 ">
+      <div className=" lg:mx-auto">
+        <div className="flex lg:mx-auto justify-between lg:w-5/6 ">
           {/* Primary menu and logo */}
           <div className="flex items-center gap-16 my-8">
             {/* logo */}
@@ -45,43 +53,73 @@ const Navbar = () => {
             </div>
             {/* primary */}
             <div className="hidden lg:flex gap-10 ">
-              <a href="/" className="">
+              <Link to="/" className="">
                 Home
-              </a>
-              <a href="/products">Products</a>
-              <a onClick={handleContactClick} style={{ cursor: "pointer" }}>
+              </Link>
+              <Link to="/products">Products</Link>
+              <Link onClick={handleContactClick} style={{ cursor: "pointer" }}>
                 Contact Us
-              </a>
+              </Link>
+            </div>
+            <div className="hidden lg:flex">
+              <input
+                type="text"
+                placeholder="Search Products"
+                className="p-3 rounded-lg bg-white w-[500px]"
+                onClick={() => {
+                  navigate("/products");
+                }}
+              />
             </div>
           </div>
           {/* secondary */}
           <div className="flex gap-3">
             <div className="ml-2 flex items-center gap-2">
-              {/* <input
-                className="rounded-full border-solid border-2 border-gray-300 py-1 px-2 hover:bg-gray-700 hover:text-gray-100"
-                type="text"
-                placeholder="Search"
-              /> */}
-              <div>
-                <button className="">
-                  <ShoppingCartIcon className="h-12 text-primary" />
+              <div className="relative">
+                <button className="relative">
+                  <Link to="/checkout">
+                    <ShoppingCartIcon className="h-12 text-primary" />
+                    {cart.length > 0 && (
+                      <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-yellow-400 text-xs font-bold text-black">
+                        {cart.length}
+                      </span>
+                    )}
+                  </Link>
                 </button>
               </div>
             </div>
-            {/* Mobile navigation toggle */}
-            <div className="lg:hidden m-4 flex items-center">
-              <button onClick={() => setToggleMenu(!toggleMenu)}>
-                {!toggleMenu ? (
-                  <Bars3Icon className="h-12" />
-                ) : (
-                  <XMarkIcon className="h-12" />
-                )}
-              </button>
-            </div>
+          </div>
+          {/* Mobile navigation toggle */}
+          <div className="lg:hidden flex items-center">
+            <button onClick={() => setFilterMenu(!filterMenu)}>
+              {!filterMenu ? (
+                <FunnelIcon className="h-12" />
+              ) : (
+                <XMarkIcon className="h-12" />
+              )}
+            </button>
+          </div>
+          <div className="lg:hidden flex items-center">
+            <button onClick={() => setToggleMenu(!toggleMenu)}>
+              {!toggleMenu ? (
+                <Bars3Icon className="h-12" />
+              ) : (
+                <XMarkIcon className="h-12" />
+              )}
+            </button>
           </div>
         </div>
       </div>
       {/* mobile navigation */}
+      <div
+        className={`fixed z-40 w-full  bg-gray-100 overflow-hidden flex flex-col lg:hidden gap-12  origin-top duration-700 ${
+          !filterMenu ? "h-0" : "h-full"
+        }`}
+      >
+        <div className="p-8 lg:flex justify-center md:pt-16 lg:bg-gray-200 lg:w-1/3">
+          <Filters />
+        </div>
+      </div>
       <div
         className={`fixed z-40 w-full  bg-gray-100 overflow-hidden flex flex-col lg:hidden gap-12  origin-top duration-700 ${
           !toggleMenu ? "h-0" : "h-full"
@@ -89,12 +127,26 @@ const Navbar = () => {
       >
         <div className="px-8">
           <div className="flex flex-col gap-8 font-bold tracking-wider">
-            <a href="#" className="border-l-4 border-gray-600">
-              Features
-            </a>
-            <a href="#">Pricing</a>
-            <a href="#">Download</a>
-            <a href="#">Classic</a>
+            <Link
+              onClick={() => {
+                setToggleMenu(false);
+              }}
+              to="/"
+              className="border-l-4 border-gray-600"
+            >
+              Home
+            </Link>
+            <Link
+              onClick={() => {
+                setToggleMenu(false);
+              }}
+              to="/products"
+            >
+              Products
+            </Link>
+            <Link onClick={handleContactClick} style={{ cursor: "pointer" }}>
+              Contact Us
+            </Link>
           </div>
         </div>
       </div>
