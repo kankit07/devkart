@@ -1,6 +1,6 @@
 {
   "homepage": "https://kankit07/github.io/devkart",
-  "name": "styx-ecommerce",
+  "name": "devkart",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,8 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy":"npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
