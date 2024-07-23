@@ -16,6 +16,7 @@ const Navbar = () => {
 
   const {
     state: { cart },
+    filterDispatch,
   } = CartState();
 
   const navigate = useNavigate();
@@ -66,8 +67,12 @@ const Navbar = () => {
                 type="text"
                 placeholder="Search Products"
                 className="p-3 rounded-lg bg-white w-[500px]"
-                onClick={() => {
-                  navigate("/products");
+                //
+                onChange={(e) => {
+                  filterDispatch({
+                    type: "FILTER_BY_SEARCH",
+                    payload: e.target.value,
+                  });
                 }}
               />
             </div>

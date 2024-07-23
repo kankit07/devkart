@@ -86,7 +86,7 @@ const Filters = () => {
         </div>
       </div>
       <div className="mb-4">
-        <h3 className="text-md font-medium">Rating</h3>
+        <h3 className="text-md font-medium">Minimun Rating</h3>
         <Ratings
           rating={byRating}
           onClick={(i) => {

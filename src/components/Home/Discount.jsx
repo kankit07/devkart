@@ -1,4 +1,5 @@
 import React from "react";
+import { Products } from "../../utils/Products";
 
 const Discount = () => {
   return (
@@ -8,18 +9,18 @@ const Discount = () => {
       </h2>
 
       <div className="flex flex-wrap justify-center gap-16  md:gap-32">
-        {[1, 2, 3].map((item) => (
+        {Products.slice(0, 3).map((product) => (
           <div
-            key={item}
+            key={product.id}
             className="bg-gray-200 p-4 rounded-lg shadow-lg w-full sm:w-64 md:w-72 lg:w-80"
           >
             <img
-              src="image-url"
-              alt={`Product ${item}`}
+              src={product.image}
+              alt={`Product ${product.name}`}
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h3 className="text-xl font-semibold mb-2">Product Name</h3>
-            <p className="text-gray-600">₹99.99</p>
+            <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+            <p className="text-gray-600">₹{product.price}</p>
             <span className="text-gray-600 line-through">₹129.99</span>
           </div>
         ))}
